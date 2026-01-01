@@ -26,7 +26,7 @@ function TreeItem({ node, depth }: TreeItemProps) {
     <div className="font-mono text-sm">
       <div
         className={`flex items-center gap-2 py-1 px-2 hover:bg-accent rounded cursor-pointer transition-colors ${
-          isFolder ? "text-blue-400" : "text-gray-300"
+          isFolder ? "text-gray-500" : "text-gray-300"
         }`}
         style={{ paddingLeft: `${depth * 20 + 8}px` }}
         onClick={handleClick}
@@ -69,7 +69,7 @@ export function FileSystemTree({ data }: FileSystemTreeProps) {
   return (
     <div className="w-full h-full bg-card border border-border rounded-lg p-4 overflow-auto">
       <div className="font-mono text-sm mb-2 text-muted-foreground">
-        ~/project
+        ~/my-drive
       </div>
       {data.map((node, index) => (
         <TreeItem key={`${node.name}-${index}`} node={node} depth={0} />
