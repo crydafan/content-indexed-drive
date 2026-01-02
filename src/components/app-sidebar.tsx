@@ -17,6 +17,7 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 interface SidebarButtonProps {
   icon: ReactNode;
@@ -30,19 +31,22 @@ function SidebarButton({
   label,
   onClick,
   isActive = false,
-}: SidebarButtonProps) {
+  to,
+}: SidebarButtonProps & { to: string }) {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button
-            variant={isActive ? "default" : "ghost"}
-            size="icon"
-            className="w-12 h-12"
-            onClick={onClick}
-          >
-            {icon}
-          </Button>
+          <Link to={to}>
+            <Button
+              variant={isActive ? "default" : "ghost"}
+              size="icon"
+              className="w-12 h-12"
+              onClick={onClick}
+            >
+              {icon}
+            </Button>
+          </Link>
         </TooltipTrigger>
         <TooltipContent side="right">
           <p className="font-mono">{label}</p>
@@ -57,19 +61,40 @@ export function AppSidebar() {
     <div className="flex flex-col items-center gap-4 bg-card border border-border rounded-lg p-4 h-full">
       {/* Navigation Buttons */}
       <div className="flex flex-col items-center gap-2">
-        <SidebarButton icon={<Home size={30} />} label="Home" />
-        <SidebarButton icon={<FolderOpen size={30} />} label="Files" isActive />
-        <SidebarButton icon={<Search size={30} />} label="Search" />
-        <SidebarButton icon={<Star size={30} />} label="Favorites" />
-        <SidebarButton icon={<Clock size={30} />} label="Recent" />
+        <SidebarButton icon={<Home size={30} />} label="Home" to="/home" />
+        <SidebarButton
+          icon={<FolderOpen size={30} />}
+          label="Files"
+          to="/files"
+          isActive
+        />
+        <SidebarButton
+          icon={<Search size={30} />}
+          label="Search"
+          to="/search"
+        />
+        <SidebarButton
+          icon={<Star size={30} />}
+          label="Favorites"
+          to="/favorites"
+        />
+        <SidebarButton icon={<Clock size={30} />} label="Recent" to="/recent" />
       </div>
 
       <Separator />
 
       {/* Settings and Help */}
       <div className="flex flex-col items-center gap-2">
-        <SidebarButton icon={<Settings size={20} />} label="Settings" />
-        <SidebarButton icon={<HelpCircle size={20} />} label="Help" />
+        <SidebarButton
+          icon={<Settings size={20} />}
+          label="Settings"
+          to="/settings"
+        />
+        <SidebarButton
+          icon={<HelpCircle size={20} />}
+          label="Help"
+          to="/help"
+        />
       </div>
 
       {/* Spacer to push user info to bottom */}

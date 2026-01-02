@@ -1,18 +1,17 @@
 import "./index.css";
-import { FileSystemTree } from "./components/file-system-tree";
-import { AppSidebar } from "./components/app-sidebar";
-import { MOCK_FILESYSTEM } from "./lib/constants";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./home/page";
+import FilesPage from "./files/page";
+import SearchPage from "./search/page";
 
 export function App() {
   return (
-    <div className="h-screen w-screen flex flex-row gap-4 p-6 relative z-10">
-      <div className="w-20 h-full">
-        <AppSidebar />
-      </div>
-      <div className="flex-1 h-full">
-        <FileSystemTree data={MOCK_FILESYSTEM} />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="/files" element={<FilesPage />} />
+      <Route path="/search" element={<SearchPage />} />
+    </Routes>
   );
 }
 
